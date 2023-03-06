@@ -3,7 +3,7 @@ app:
   baseUrl: http://localhost:3000
 
 organization:
-  name: My Company
+  name: Beta Test
 
 backend:
   # Used for enabling authentication, secret is shared by all backend plugins
@@ -45,6 +45,9 @@ integrations:
     # - host: ghe.example.net
     #   apiBaseUrl: https://ghe.example.net/api/v3
     #   token: ${GHE_TOKEN}
+  gitlab:
+    - host: gitlab.com
+      token: glpat-G8PYA7sgxgCbVSCWoBWt
 
 proxy:
   '/test':
@@ -64,7 +67,11 @@ techdocs:
 
 auth:
   # see https://backstage.io/docs/auth/ to learn about auth providers
-  providers: {}
+  providers:
+    gitlab:
+      development:
+        clientId: 1636172c1ee3d7c646d38d3bab43001252bbaccec5673c04a1879878a4f4f6b7
+        clientSecret: 51c8d87922f16d123f3c4bd8fe80f85f524655e2b4fcc7663b0ab94d136ef5c4
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options

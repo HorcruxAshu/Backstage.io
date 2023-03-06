@@ -70,6 +70,15 @@ import {
 
 import { TechDocsAddons } from '@backstage/plugin-techdocs-react';
 import { ReportIssue } from '@backstage/plugin-techdocs-module-addons-contrib';
+// packages/app/src/components/catalog/EntityPage.tsx
+// eslint-disable-next-line import/no-extraneous-dependencies
+import {
+  isGitlabAvailable,
+  EntityGitlabContent,
+} from '@immobiliarelabs/backstage-plugin-gitlab';
+
+// Farther down at the serviceEntityPage declaration
+
 
 const techdocsContent = (
   <EntityTechdocsContent>
@@ -180,6 +189,14 @@ const serviceEntityPage = (
     <EntityLayout.Route path="/docs" title="Docs">
       {techdocsContent}
     </EntityLayout.Route>
+
+    <EntityLayout.Route
+            if={isGitlabAvailable}
+            path="/gitlab"
+            title="Gitlab"
+        >
+            <EntityGitlabContent />
+        </EntityLayout.Route>
   </EntityLayout>
 );
 
