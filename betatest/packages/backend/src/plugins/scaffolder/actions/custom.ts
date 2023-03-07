@@ -1,33 +1,36 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createTemplateAction } from '@backstage/plugin-scaffolder-node';
-import fs from 'fs-extra';
+import { promisify } from 'util';
+
+const { exec } = require("child_process");
+
+const promisifiedExec = promisify(exec);
 
 export const createNewFileAction = () => {
-  return createTemplateAction<{ contents: string; filename: string }>({
-    id: 'mycompany:create-file',
+  return createTemplateAction<{ pluginURL: string; plugin: string }>({
+    id: 'myplugin:install-plugin',
     schema: {
       input: {
-        required: ['contents', 'filename'],
+        required: ['pluginURL', 'plugin'],
         type: 'object',
         properties: {
-          contents: {
+          pluginURL: {
             type: 'string',
-            title: 'Contents',
-            description: 'The contents of the file',
+            title: 'PluginURL',
+            description: 'The URL of the plugin',
           },
-          filename: {
+          plugin: {
             type: 'string',
-            title: 'Filename',
-            description: 'The filename of the file that will be created',
+            title: 'Plugin',
+            description: 'The name of the Plugin',
           },
         },
       },
     },
-    async handler(ctx) {
-      await fs.outputFile(
-        `${ctx.workspacePath}/${ctx.input.filename}`,
-        ctx.input.contents,
-      );
+    async handler({input}) {
+      const  pluginURL = input;
+      console.log("Installing Plugins");
+      await exec(`yarn add ${pluginURL}`);
     },
   });
 };

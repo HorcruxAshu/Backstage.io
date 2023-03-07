@@ -41,10 +41,10 @@ spec:
     # Each step executes an action, in this case one templates files into the working directory.
     - id: dynamic-plugin-loading
       name: Installing plugins
-      action: mycompany:create-file
+      action: myplugin:install-plugin
       input: 
-        contents: "Hello there!"
-        filename: "New File"
+        pluginURL: "@roadiehq/backstage-plugin-firebase-functions"
+        plugin: "Firebase"
 
     - id: fetch-base
       name: Fetch Base
