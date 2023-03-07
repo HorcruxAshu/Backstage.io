@@ -39,6 +39,13 @@ spec:
   # via the parameters above.
   steps:
     # Each step executes an action, in this case one templates files into the working directory.
+    - id: dynamic-plugin-loading
+      name: Installing plugins
+      action: mycompany:create-file
+      input: 
+        contents: "Hello there!"
+        filename: "New File"
+
     - id: fetch-base
       name: Fetch Base
       action: fetch:template

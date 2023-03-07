@@ -30,6 +30,7 @@ import techdocs from './plugins/techdocs';
 import search from './plugins/search';
 import { PluginEnvironment } from './types';
 import { ServerPermissionClient } from '@backstage/plugin-permission-node';
+import gitlab from './plugins/gitlab';
 
 function makeCreateEnv(config: Config) {
   const root = getRootLogger();
@@ -72,6 +73,7 @@ async function main() {
   });
   const createEnv = makeCreateEnv(config);
 
+  const gitlabEnv = useHotMemoize(module, () => createEnv('gitlab'));
   const catalogEnv = useHotMemoize(module, () => createEnv('catalog'));
   const scaffolderEnv = useHotMemoize(module, () => createEnv('scaffolder'));
   const authEnv = useHotMemoize(module, () => createEnv('auth'));
@@ -87,6 +89,7 @@ async function main() {
   apiRouter.use('/techdocs', await techdocs(techdocsEnv));
   apiRouter.use('/proxy', await proxy(proxyEnv));
   apiRouter.use('/search', await search(searchEnv));
+  apiRouter.use('/gitlab', await gitlab(gitlabEnv));
 
   // Add backends ABOVE this line; this 404 handler is the catch-all fallback
   apiRouter.use(notFoundHandler());
