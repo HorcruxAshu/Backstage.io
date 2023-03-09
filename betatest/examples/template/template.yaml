@@ -43,8 +43,8 @@ spec:
       name: Installing plugins
       action: myplugin:install-plugin
       input: 
-        pluginURL: "@roadiehq/backstage-plugin-firebase-functions"
-        plugin: "Firebase"
+        pluginURL: ""
+        plugin: ""
 
     - id: fetch-base
       name: Fetch Base

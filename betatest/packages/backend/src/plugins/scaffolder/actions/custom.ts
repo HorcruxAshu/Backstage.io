@@ -28,9 +28,11 @@ export const createNewFileAction = () => {
       },
     },
     async handler({input}) {
-      const  pluginURL = input;
+      const  pluginURL = input.pluginURL;
       console.log("Installing Plugins");
-      await exec(`yarn add ${pluginURL}`);
+      if(pluginURL.length > 1){
+        await exec(`cd .. && yarn add ${pluginURL}`)
+      }
     },
   });
 };

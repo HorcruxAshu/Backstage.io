@@ -77,6 +77,8 @@ import {
   EntityGitlabContent,
 } from '@immobiliarelabs/backstage-plugin-gitlab';
 
+// eslint-disable-next-line no-restricted-imports
+import {ExampleComponent} from '../ExampleComponent';
 // Farther down at the serviceEntityPage declaration
 
 
@@ -197,6 +199,12 @@ const serviceEntityPage = (
         >
             <EntityGitlabContent />
         </EntityLayout.Route>
+        <EntityLayout.Route
+            path="/dynamic-plugin"
+            title="Dynamic Plugin"
+          >   
+          <ExampleComponent/>
+          </EntityLayout.Route>
   </EntityLayout>
 );
 
